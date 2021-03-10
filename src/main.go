@@ -5,11 +5,13 @@ import (
 	"rbtree/src/rbtree"
 )
 
+// Int is a Struct which have Sortable interface
 type Int struct {
 	val int
 	rbtree.Sortable
 }
 
+// Less is the implemention of Sortable interface
 func (a Int) Less(than rbtree.Sortable) bool {
 	return a.val < than.(Int).val
 }

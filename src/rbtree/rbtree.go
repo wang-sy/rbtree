@@ -1,6 +1,9 @@
 package rbtree
 
-// RBTree
+// RBTree struct
+// To create a rbtree ::
+// rb := rbtree.RBTree{}
+// rb.Set() \\ rb.Get()
 type RBTree struct {
 	root    *RBNode // tree root
 	nilNode *RBNode // nil point
@@ -23,10 +26,10 @@ func (tree *RBTree) Set(key Sortable, val interface{}) {
 			val:   val,
 			key:   key,
 			color: BLACK,
-			ls: tree.nilNode,
-			rs: tree.nilNode,
+			ls:    tree.nilNode,
+			rs:    tree.nilNode,
 		}
-		tree.count ++
+		tree.count++
 		return
 	}
 	insertPos := tree.getNode(key)
@@ -41,15 +44,15 @@ func (tree *RBTree) Set(key Sortable, val interface{}) {
 		val:   val,
 		key:   key,
 		color: RED,
-		ls: tree.nilNode,
-		rs: tree.nilNode,
+		ls:    tree.nilNode,
+		rs:    tree.nilNode,
 	}
 	if insertNode.key.Less(insertPos.key) {
 		insertPos.ls = insertNode
 	} else {
 		insertPos.rs = insertNode
 	}
-	tree.count ++
+	tree.count++
 	tree.doBalance(insertNode)
 }
 
@@ -96,9 +99,8 @@ func reverseSubTreeColor(node *RBNode) {
 
 // do the r&b balance
 func (tree *RBTree) doBalance(node *RBNode) {
-	if node.p.p != tree.nilNode && (
-		(node.p.p.ls == node.p && node.p.p.rs != tree.nilNode) ||
-			(node.p.p.rs == node.p && node.p.p.ls != tree.nilNode)){ // node's parent has brother
+	if node.p.p != tree.nilNode && ((node.p.p.ls == node.p && node.p.p.rs != tree.nilNode) ||
+		(node.p.p.rs == node.p && node.p.p.ls != tree.nilNode)) { // node's parent has brother
 		reverseSubTreeColor(node)
 		tree.doBalance(node.p.p)
 		return
@@ -123,7 +125,7 @@ func (tree *RBTree) doBalance(node *RBNode) {
 			pp.rightRotate()
 		}
 	} else { // node.p is right son of node.p.p
-		if node == node.p.rs{
+		if node == node.p.rs {
 			if node.p.p == tree.root {
 				tree.root = node.p
 			}
@@ -144,9 +146,9 @@ func (tree *RBTree) doBalance(node *RBNode) {
 
 }
 
-
+/*
 // Delete RBNode which has key
-func (tree *RBTree)Delete (key Sortable) {
+func (tree *RBTree) Delete(key Sortable) {
 	node := tree.getNode(key)
 	if node == tree.nilNode {
 		return
@@ -169,8 +171,9 @@ func (tree *RBTree)Delete (key Sortable) {
 	if node == tree.root {
 		tree.root = replaceNode
 	}
-	tree.count --
+	tree.count--
 }
+
 
 // make the tree balance again
 func (tree *RBTree)deleteBalance (node *RBNode) *RBNode {
@@ -204,8 +207,10 @@ func (tree *RBTree)getDeleteNode (node *RBNode) *RBNode {
 
 }
 
+*/
+
 // find RBNode which have max key in a sub_tree which has node as root
-func (tree *RBTree)max(node *RBNode) *RBNode {
+func (tree *RBTree) max(node *RBNode) *RBNode {
 	for node.rs != tree.nilNode {
 		node = node.rs
 	}
@@ -213,7 +218,7 @@ func (tree *RBTree)max(node *RBNode) *RBNode {
 }
 
 // find RBNode which have min key in a sub_tree which has node as root
-func (tree *RBTree)min(node *RBNode) *RBNode {
+func (tree *RBTree) min(node *RBNode) *RBNode {
 	for node.ls != tree.nilNode {
 		node = node.ls
 	}

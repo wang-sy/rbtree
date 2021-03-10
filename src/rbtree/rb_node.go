@@ -1,5 +1,6 @@
 package rbtree
 
+// RBNode the basic item of rbtree
 type RBNode struct {
 	ls    *RBNode     // left son
 	rs    *RBNode     // right son
@@ -10,7 +11,9 @@ type RBNode struct {
 }
 
 const (
-	RED   = true
+	// RED RBNode color is RED
+	RED = true
+	// BLACK RBNode color is BLACK
 	BLACK = false
 )
 
